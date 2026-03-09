@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Magical Women's Day Bouquet</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #d81b60; 
+            --secondary-color: #f48fb1; 
+            --magical-bg: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #fce4ec 100%);
+            --text-dark: #333;
+            --fancy-font: 'Great Vibes', cursive;
+            --motto-font: 'Pinyon Script', cursive;
+            --body-font: 'Playfair Display', serif;
+            --ui-font: 'Inter', sans-serif;
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.7);
+            --glass-shadow: 0 8px 32px 0 rgba(216, 27, 96, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100dvh; /* Mobile viewport height */
+            overflow: hidden; /* Prevent body scroll */
+            font-family: var(--body-font);
+            color: var(--text-dark);
+            background: var(--magical-bg);
+            background-size: 200% 200%;
+            animation: gradientAnim 15s ease infinite;
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Global Particles --- */
+        #particles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            animation: float 6s infinite ease-in-out;
+            opacity: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+
+        /* --- 1. Magical Landing Page --- */
+        #landing-page {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .background-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            max-width: 650px;
+            opacity: 0.85;
+            filter: drop-shadow(0 0 40px rgba(255,255,255,0.9));
+            z-index: 1;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: heartPulse 3s ease-in-out infinite alternate;
+        }
+        @keyframes heartPulse {
+            0% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 30px rgba(255,255,255,0.7)); }
+            100% { transform: translate(-50%, -50%) scale(1.05); filter: drop-shadow(0 0 50px rgba(255,255,255,1)); }
+        }
+        .background-heart svg {
+            width: 100%;
+            height: auto;
+            color: #ffffff;
+            opacity: 0.9;
+            filter: blur(5px); /* Soften edges slightly for the glow effect */
+        }
+
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #landing-page h1 {
+            font-family: var(--fancy-font);
+            font-size: 5.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 4px 15px rgba(255, 255, 255, 0.8);
+            margin: 0 0 5px 0;
+            line-height: 1.1;
+            z-index: 2;
+            opacity: 0;
+            animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .motto {
+            font-family: var(--motto-font);
+            font-size: 3.8rem;
+            color: #ad1457;
+            margin-bottom: 35px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(255,255,255,1);
+            z-index: 2;
+            opacity: 0;
+            animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .start-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-family: var(--ui-font);
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: slideUpFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.8s;
+        }
+
+        .start-btn:hover, .start-btn:active {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 40px 0 rgba(216, 27, 96, 0.4);
+        }
+
+        /* --- 2. Editor Page --- */
+        #editor-page {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+            z-index: 50;
+        }
+
+        /* Header logic inside editor to be captured */
+        #bouquet-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: transparent;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px 10px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            top: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: all 0.2s;
+            z-index: 20;
+        }
+        .back-btn:active, .back-btn:hover { transform: scale(0.9); }
+
+        .header-title {
+            text-align: center;
+            margin-top: 5px;
+        }
+        .header-title h2 {
+            font-family: var(--fancy-font);
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--primary-color);
+            text-shadow: 0 2px 5px rgba(255,255,255,0.8);
+            line-height: 1;
+        }
+        .header-title p {
+            margin: 5px 0 0 0;
+            font-family: var(--ui-font);
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.8;
+            color: #ad1457;
+        }
+
+        /* Bouquet Canvas */
+        #bouquet-canvas-area {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Align everything to the bottom center */
+            padding-bottom: 30px;
+            z-index: 1;
+        }
+
+        /* The central anchor point for clustering stems */
+        #anchor-point {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 10;
+        }
+
+        /* Elegant Frosted Glass Wrapper/Hatbox */
+        .ribbon-wrapper {
+            position: absolute;
+            bottom: -15px;
+            width: 170px;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-top: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 15px 15px 45px 45px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), inset 0 20px 20px rgba(255, 255, 255, 0.6);
+            z-index: 50; /* In front of base of flowers */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for spawned flowers */
+        #flowers-container {
+            position: absolute;
+            bottom: 60px; /* Base insertion point inside the wrapper for the stems */
+            left: 50%;
+            z-index: 30; /* Behind the ribbon wrapper */
+        }
+
+        /* Dynamic Bouquet Cluster Item (With generated stems) */
+        .flower-cluster-item {
+            position: absolute;
+            bottom: 0px; 
+            left: 50%;
+            margin-left: -50px; /* Half of baseline width to center */
+            width: 100px;
+            /* Pivot precisely at the bottom center to cluster stems together */
+            transform-origin: bottom center; 
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            will-change: transform;
+        }
+
+        .flower-stem-visual {
+            width: 5px;
+            background: linear-gradient(to top, #2e7d32, #68bb59);
+            border-radius: 5px;
+            z-index: 1;
+            /* Height dynamic per JS */
+        }
+
+        .flower-image {
+            width: auto;
+            max-width: 130px; 
+            object-fit: contain;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+            margin-bottom: -15px; /* Pull it down over the stem slightly */
+            z-index: 2;
+            position: relative;
+        }
+
+        /* --- Editor Actions & Menu Wrapped for Desktop Max-Width --- */
+        .bottom-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Editor Actions */
+        .editor-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 15px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .action-btn {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 14px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-family: var(--ui-font);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            gap: 6px;
+        }
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        .action-btn:active, .action-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: scale(0.95);
+            border-color: var(--primary-color);
+        }
+
+        /* Flower Menu (Scrollable Carousel) */
+        #flower-menu-container {
+            width: 100%;
+            padding: 10px 15px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-family: var(--ui-font);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ad1457;
+            margin-bottom: 12px;
+        }
+
+        #flower-menu {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 12px;
+            padding-bottom: 10px; /* Space for scrollbar */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* Mobile smooth scroll */
+        }
+
+        /* Custom Elegant Scrollbar for Desktop/Mobile */
+        #flower-menu::-webkit-scrollbar {
+            height: 6px;
+        }
+        #flower-menu::-webkit-scrollbar-thumb {
+            background: #f8bbd0;
+            border-radius: 10px;
+        }
+        #flower-menu::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+        
+        .menu-item {
+            flex: 0 0 75px;
+            flex-shrink: 0; /* CRITICAL FIX: prevents squishing */
+            height: 75px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .menu-item:active, .menu-item:hover {
+            border-color: var(--primary-color);
+            transform: scale(0.92);
+        }
+        .menu-item img {
+            max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Modal Area */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 320px;
+            position: relative;
+            transform: scale(0.9);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; right: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            color: #999;
+            transition: 0.2s;
+        }
+        .modal-close:hover { color: #333; }
+
+        .modal-content h3 {
+            font-family: var(--fancy-font);
+            color: var(--primary-color);
+            font-size: 2.4rem;
+            margin: 0 0 10px 0;
+            line-height: 1;
+            width: 100%;
+        }
+        .modal-content p { 
+            font-family: var(--ui-font);
+            font-size: 0.95rem; 
+            margin-bottom: 25px; 
+            color: #666; 
+            width: 100%;
+        }
+        
+        /* Centered QR Container */
+        #qr-container-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #qrcode {
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .share-link-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            color: #333;
+            outline: none;
+        }
+        .share-link-input:focus { border-color: var(--secondary-color); }
+
+        .copy-btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-family: var(--ui-font);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .copy-btn:active, .copy-btn:hover { background: #ad1457; transform: scale(0.98); }
+
+        /* Loader */
+        .flower-loader {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            display: none;
+            color: var(--primary-color);
+        }
+        .flower-loader svg {
+            width: 40px; height: 40px;
+            animation: spin 1.5s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Watermark for canvas */
+        .watermark {
+            display: none;
+            position: absolute;
+            bottom: 130px;
+            right: 25px;
+            font-family: var(--fancy-font);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-shadow: 0 2px 10px rgba(255,255,255,0.9);
+            z-index: 100;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 600px) {
+            #landing-page h1 { font-size: 4rem; }
+            .motto { font-size: 2.8rem; }
+            .background-heart { width: 140vw; max-width: 140vw; }
+            
+            .header-title h2 { font-size: 2.2rem; }
+            .header-title p { font-size: 0.85rem; }
+            
+            #anchor-point { bottom: 20px; transform: translateX(-50%) scale(0.9); }
+            
+            .editor-actions { padding: 12px 10px; gap: 8px; }
+            .action-btn { font-size: 0.75rem; padding: 10px 4px; }
+            .action-btn svg { width: 18px; height: 18px; }
+            
+            .menu-item { flex: 0 0 65px; height: 65px; }
+            #flower-menu-container { padding: 10px; }
+        }
+        @media (max-height: 700px) {
+            #anchor-point { bottom: 10px; transform: translateX(-50%) scale(0.85); }
+            .flower-image { max-width: 110px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Particles Background -->
+    <div id="particles"></div>
+
+    <!-- 1. Magical Landing Page -->
+    <div id="landing-page">
+        <div class="background-heart">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <h1>Happy Women's Day</h1>
+        <div class="motto">Every woman is a flower.</div>
+        <button class="start-btn" onclick="startExperience()">
+            Craft a bouquet
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+    </div>
+
+    <!-- 2. Editor Page -->
+    <div id="editor-page">
+        
+        <!-- Area to capture via html2canvas (was 'capture-area', now matched to instructions) -->
+        <div id="bouquet-wrapper">
+            <header id="editor-header">
+                <div class="back-btn" onclick="goBackToLanding()">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </div>
+                <div class="header-title">
+                    <h2>Happy Women's Day</h2>
+                    <p>Craft a bouquet as unique as her.</p>
+                </div>
+            </header>
+
+            <!-- Main Bouquet Canvas Area -->
+            <div id="bouquet-canvas-area">
+                <div class="watermark" id="watermark">Made with Love</div>
+                
+                <div id="anchor-point">
+                    <!-- Elegant Frosted Glass Wrapper/Hatbox -->
+                    <div class="ribbon-wrapper"></div>
+                    <!-- Flowers target container perfectly aligned -->
+                    <div id="flowers-container"></div>
+                </div>
+
+                <div class="flower-loader" id="flower-loader">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-wrapper">
+            <!-- Action Grid (Mobile) with Minimal SVG Icons -->
+            <div class="editor-actions">
+                <div class="action-btn" onclick="undoFlower()">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+                    Undo
+                </div>
+                <div class="action-btn" onclick="saveBouquet()">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Save
+                </div>
+                <div class="action-btn" onclick="showShareModal()">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    Share
+                </div>
+                <div class="action-btn" onclick="showQRModal()">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/></svg>
+                    QR Code
+                </div>
+            </div>
+
+            <!-- Scrollable Flower Carousel -->
+            <div id="flower-menu-container">
+                <div class="menu-title">Select Bloom</div>
+                <div id="flower-menu">
+                    <!-- Dynamically generated menu items -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </span>
+            <h3 id="modal-title">Share</h3>
+            <p id="modal-desc">Share this magical bouquet!</p>
+            
+            <div id="qr-container-wrapper" style="display:none;">
+                <div id="qrcode"></div>
+            </div>
+            
+            <div id="link-area" style="display:none; width: 100%;">
+                <input type="text" id="share-link" class="share-link-input" readonly>
+                <button class="copy-btn" onclick="copyShareLink()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    Copy Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // --- Initial Setup & Particles ---
+    const totalFlowersAvailable = 21;
+    let bouquetData = []; 
+    
+    // Create particles
+    const particlesContainer = document.getElementById('particles');
+    for(let i=0; i<40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 5 + 3;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDelay = (Math.random() * 6) + 's';
+        p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        particlesContainer.appendChild(p);
+    }
+
+    // Populate Flower Menu
+    const menu = document.getElementById('flower-menu');
+    for(let i=1; i<=totalFlowersAvailable; i++) {
+        const item = document.createElement('div');
+        item.className = 'menu-item';
+        // Force flex-shrink inline just in case of CSS overrides
+        item.style.flexShrink = '0';
+        item.onclick = () => handleAddFlower(i);
+        
+        const img = document.createElement('img');
+        img.src = `assets/flower${i}.png`;
+        img.loading = "lazy";
+        
+        img.onerror = function() { // Fallback for testing
+            this.onerror = null;
+            this.src = 'data:image/svg+xml;utf8,<svg width="70" height="70" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="%23f48fb1"/><text x="50" y="55" font-family="Arial" font-size="20" fill="white" text-anchor="middle">F'+i+'</text></svg>';
+        };
+
+        item.appendChild(img);
+        menu.appendChild(item);
+    }
+
+    // --- Transitions ---
+    function startExperience() {
+        document.getElementById('landing-page').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('landing-page').style.visibility = 'hidden';
+            const editor = document.getElementById('editor-page');
+            editor.style.visibility = 'visible';
+            editor.style.opacity = '1';
+        }, 1000);
+    }
+
+    function goBackToLanding() {
+        document.getElementById('editor-page').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('editor-page').style.visibility = 'hidden';
+            const landing = document.getElementById('landing-page');
+            landing.style.visibility = 'visible';
+            landing.style.opacity = '1';
+        }, 1000);
+    }
+
+    // --- CRITICAL FIX: True Bouquet Array Math (Generated Stems & Fanning) ---
+    const flowersContainer = document.getElementById('flowers-container');
+    const loader = document.getElementById('flower-loader');
+
+    function handleAddFlower(flowerIndex) {
+        loader.style.display = 'block';
+        
+        const count = bouquetData.length;
+        
+        // --- Intelligent Tiered Bouquet Algorithm (No Total Overlap) ---
+        let angle = 0;
+        let yOffset = 0; 
+        let xOffset = 0;
+        let stemLength = 220; 
+        
+        // Explicit positioning map to ensure new flowers go INTO empty spaces 
+        // AND significantly drop in height so they do NOT fully cover back flowers.
+        const sequence = [
+            // Layer 0: BACK (Tallest, 3 flowers)
+            { a: 0, l: 0 }, { a: 18, l: 0 }, { a: -18, l: 0 },
+            // Layer 1: MID-BACK (Drops drastically to show Layer 0 heads completely)
+            { a: 9, l: 1 }, { a: -9, l: 1 }, { a: 28, l: 1 }, { a: -28, l: 1 },
+            // Layer 2: MID-FRONT (Drops again to show Layer 1)
+            { a: 0, l: 2 }, { a: 18, l: 2 }, { a: -18, l: 2 }, { a: 38, l: 2 }, { a: -38, l: 2 },
+            // Layer 3: FRONT (Lowest ring, resting right above the vase)
+            { a: 9, l: 3 }, { a: -9, l: 3 }, { a: 28, l: 3 }, { a: -28, l: 3 },
+            // Layer 4: FILLER (For extreme density if user keeps clicking)
+            { a: 0, l: 4 }, { a: 20, l: 4 }, { a: -20, l: 4 }, { a: 35, l: 4 }, { a: -35, l: 4 }
+        ];
+
+        let configItem;
+        if (count < sequence.length) {
+            configItem = sequence[count];
+        } else {
+            // Beyond predefined array: scatter gently at the base
+            configItem = { 
+                a: (Math.random() * 70) - 35, 
+                l: 4 + Math.random() // Very low layer
+            };
+        }
+        
+        // Organic angle variation so it doesn't look perfectly robotic
+        angle = configItem.a + (Math.random() * 4 - 2); 
+        
+        // Staggered Layer Heights (CRITICAL FIX!)
+        // These drops (280 -> 215 -> 155 -> 105) are large enough (~60px) to guarantee
+        // that the previous flowers' upper halves are completely visible!
+        const layerHeights = [280, 215, 155, 105, 80];
+        
+        let baseStem = layerHeights[Math.floor(configItem.l)] || 70;
+        
+        // Side flowers naturally droop a tiny bit more to create a dome curve
+        const domeDrop = Math.abs(angle) * 0.4;
+        
+        // Final stem length calculation
+        stemLength = baseStem - domeDrop + (Math.random() * 10 - 5);
+        if (stemLength < 70) stemLength = 70 + Math.random() * 10;
+        
+        // Tiny physical nudge so perfectly identical angles don't pixel-perfect cover each other
+        xOffset = (angle / 15) * (Math.random() * 2);
+        
+        let imgScale = 0.8 + Math.random() * 0.2; // Keep sizes relatively consistent
+        
+        const config = {
+            id: 'flw_' + Date.now() + Math.random(),
+            index: flowerIndex,
+            rot: angle,
+            x: xOffset,
+            y: yOffset,
+            stem: stemLength,
+            scale: imgScale,
+            z: count + 10 // Stack correctly front-to-back
+        };
+
+        setTimeout(() => {
+            renderFlower(config);
+            bouquetData.push(config);
+            loader.style.display = 'none';
+        }, 80); 
+    }
+
+    function renderFlower(config) {
+        const item = document.createElement('div');
+        item.className = 'flower-cluster-item';
+        item.id = config.id;
+        item.style.zIndex = config.z;
+        
+        // Starting state (scale 0) pivoting strictly at bottom center
+        item.style.transform = `translate(${config.x}px, ${config.y}px) rotate(${config.rot}deg) scale(0)`;
+        item.style.opacity = '0';
+
+        // Image (Flower Head)
+        const img = document.createElement('img');
+        img.className = 'flower-image';
+        img.src = `assets/flower${config.index}.png`;
+        img.style.width = (100 * config.scale) + 'px';
+
+        img.onerror = function() {
+            this.onerror = null;
+            this.src = 'data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="%23fce4ec" stroke="%23f48fb1" stroke-width="4"/></svg>';
+        };
+
+        // Elegant Dynamic Stem
+        const stem = document.createElement('div');
+        stem.className = 'flower-stem-visual';
+        stem.style.height = config.stem + 'px';
+
+        item.appendChild(img);
+        item.appendChild(stem);
+        flowersContainer.appendChild(item);
+
+        // Force reflow
+        void item.offsetWidth;
+
+        // Animate Growth expanding upward and outward
+        item.style.transform = `translate(${config.x}px, ${config.y}px) rotate(${config.rot}deg) scale(1)`;
+        item.style.opacity = '1';
+    }
+
+    function undoFlower() {
+        if(bouquetData.length === 0) return;
+        const last = bouquetData.pop();
+        const el = document.getElementById(last.id);
+        if(el) {
+            el.style.transform = `translate(${last.x}px, ${last.y}px) rotate(${last.rot}deg) scale(0)`;
+            el.style.opacity = '0';
+            setTimeout(() => el.remove(), 400);
+        }
+    }
+
+    // --- Core Functions: Save, Share, QR ---
+    function saveBouquet() {
+        if(bouquetData.length === 0) {
+            alert("Please add some flowers to your bouquet first.");
+            return;
+        }
+
+        const captureArea = document.getElementById('bouquet-wrapper');
+        const watermark = document.getElementById('watermark');
+        const backBtn = document.querySelector('.back-btn');
+        
+        // Prepare for capture
+        watermark.style.display = 'block';
+        backBtn.style.display = 'none'; 
+        const originalBg = captureArea.style.background;
+        captureArea.style.background = 'var(--magical-bg)'; 
+        
+        // Timeout to ensure styles have applied before capturing
+        setTimeout(() => {
+            html2canvas(captureArea, {
+                scale: 2, 
+                useCORS: true,
+                logging: false,
+                backgroundColor: null
+            }).then(canvas => {
+                // Restore UI
+                watermark.style.display = 'none';
+                backBtn.style.display = 'flex';
+                captureArea.style.background = originalBg;
+
+                // Download safely
+                const imgData = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = `My-Bouquet.png`;
+                link.href = imgData;
+                
+                // Programmatically trigger click (works across platforms)
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+            }).catch(err => {
+                console.error("Save error:", err);
+                alert("Error saving image. Please try again.");
+                watermark.style.display = 'none';
+                backBtn.style.display = 'flex';
+                captureArea.style.background = originalBg;
+            });
+        }, 300);
+    }
+
+    function generateEncodedURL() {
+        const ids = bouquetData.map(f => f.index).join('-');
+        const url = new URL(window.location.href);
+        if(ids) {
+            url.searchParams.set('b', ids);
+        } else {
+            url.searchParams.delete('b');
+        }
+        return url.toString();
+    }
+
+    const modal = document.getElementById('modal');
+    const qrContainerWrapper = document.getElementById('qr-container-wrapper');
+    const qrDiv = document.getElementById('qrcode');
+    const linkDiv = document.getElementById('link-area');
+    const shareInput = document.getElementById('share-link');
+    let qrInstance = null;
+
+    function showShareModal() {
+        if(bouquetData.length === 0) {
+            alert("Please add some flowers first!");
+            return;
+        }
+        const url = generateEncodedURL();
+        document.getElementById('modal-title').innerText = "Share Bouquet";
+        document.getElementById('modal-desc').innerText = "Copy the link below to share your creation.";
+        
+        qrContainerWrapper.style.display = 'none';
+        linkDiv.style.display = 'block';
+        shareInput.value = url;
+        
+        modal.classList.add('active');
+    }
+
+    function copyShareLink() {
+        shareInput.select();
+        shareInput.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand('copy');
+        const btn = document.querySelector('.copy-btn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        btn.style.background = "#4CAF50";
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = "var(--primary-color)";
+        }, 2000);
+    }
+
+    function showQRModal() {
+        if(bouquetData.length === 0) {
+            alert("Please add some flowers first!");
+            return;
+        }
+        const url = generateEncodedURL();
+        document.getElementById('modal-title').innerText = "Scan Code";
+        document.getElementById('modal-desc').innerText = "Scan this code to instantly open the bouquet.";
+        
+        linkDiv.style.display = 'none';
+        qrContainerWrapper.style.display = 'flex'; // Use the flex wrapper to center
+        qrDiv.innerHTML = ""; 
+        
+        qrInstance = new QRCode(qrDiv, {
+            text: url,
+            width: 170,
+            height: 170,
+            colorDark : "#d81b60",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+
+    // On Load Check URL for shared bouquet
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const b = urlParams.get('b');
+        if(b) {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('editor-page').style.visibility = 'visible';
+            document.getElementById('editor-page').style.opacity = '1';
+            
+            document.querySelector('.header-title h2').innerText = "A Gift For You";
+            document.querySelector('.header-title p').innerText = "Every woman is a flower.";
+            document.querySelector('.back-btn').style.display = 'none'; 
+            
+            const indices = b.split('-');
+            let sequenceDelay = 400; 
+            indices.forEach(idx => {
+                const i = parseInt(idx);
+                if(!isNaN(i)) {
+                    setTimeout(() => {
+                        handleAddFlower(i);
+                    }, sequenceDelay);
+                    sequenceDelay += 200; 
+                }
+            });
+        }
+    };
+</script>
+
+</body>
+</html>
