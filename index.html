@@ -580,18 +580,7 @@
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Watermark for canvas */
-        .watermark {
-            display: none;
-            position: absolute;
-            bottom: 130px;
-            right: 25px;
-            font-family: var(--fancy-font);
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            text-shadow: 0 2px 10px rgba(255,255,255,0.9);
-            z-index: 100;
-        }
+
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 600px) {
@@ -653,7 +642,6 @@
 
             <!-- Main Bouquet Canvas Area -->
             <div id="bouquet-canvas-area">
-                <div class="watermark" id="watermark">Made with Love</div>
                 
                 <div id="anchor-point">
                     <!-- Elegant Frosted Glass Wrapper/Hatbox -->
@@ -924,11 +912,9 @@
         }
 
         const captureArea = document.getElementById('bouquet-wrapper');
-        const watermark = document.getElementById('watermark');
         const backBtn = document.querySelector('.back-btn');
         
         // Prepare for capture
-        watermark.style.display = 'block';
         backBtn.style.display = 'none'; 
         const originalBg = captureArea.style.background;
         captureArea.style.background = 'var(--magical-bg)'; 
@@ -942,7 +928,6 @@
                 backgroundColor: null
             }).then(canvas => {
                 // Restore UI
-                watermark.style.display = 'none';
                 backBtn.style.display = 'flex';
                 captureArea.style.background = originalBg;
 
@@ -960,7 +945,6 @@
             }).catch(err => {
                 console.error("Save error:", err);
                 alert("Error saving image. Please try again.");
-                watermark.style.display = 'none';
                 backBtn.style.display = 'flex';
                 captureArea.style.background = originalBg;
             });
