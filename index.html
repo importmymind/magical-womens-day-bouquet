@@ -708,6 +708,14 @@
                     Copy Link
                 </button>
             </div>
+            
+            <div id="preview-container" style="display:none; width: 100%;">
+                <img id="preview-image" src="" style="max-width:100%; border-radius:12px; margin-bottom:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-height: 45vh; object-fit: contain;">
+                <div style="font-size: 0.85rem; color: #ad1457; font-weight: 600; padding: 12px; background: #fce4ec; border-radius: 8px; border: 1px solid #f8bbd0;">
+                    💡 <b>Press and hold</b> the image above and select <b>"Save to Photos"</b> or <b>"Download Image"</b>.
+                    <br><br><span style="font-size: 0.75rem; font-weight: 400;">(Instagram and some browsers block direct downloads)</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -931,16 +939,47 @@
                 backBtn.style.display = 'flex';
                 captureArea.style.background = originalBg;
 
-                // Download safely
                 const imgData = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.download = `My-Bouquet.png`;
-                link.href = imgData;
-                
-                // Programmatically trigger click (works across platforms)
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+
+                const fallbackDownload = () => {
+                    const ua = navigator.userAgent || navigator.vendor || window.opera;
+                    const isInAppBrowser = (ua.indexOf('Instagram') > -1) || 
+                                           (ua.indexOf('FBAN') > -1) || 
+                                           (ua.indexOf('FBAV') > -1) || 
+                                           (ua.indexOf('Snapchat') > -1);
+                    
+                    if (isInAppBrowser) {
+                        showPreviewModal(imgData);
+                    } else {
+                        const link = document.createElement('a');
+                        link.download = `My-Bouquet.png`;
+                        link.href = imgData;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                };
+
+                // Try Web Share API with file first (works great on iOS Instagram/Safari)
+                canvas.toBlob(blob => {
+                    if (blob) {
+                        const file = new File([blob], "My-Bouquet.png", { type: 'image/png' });
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            navigator.share({
+                                files: [file],
+                                title: 'My Bouquet',
+                                text: 'Here is my beautiful bouquet!'
+                            }).catch((error) => {
+                                console.log('Sharing failed or cancelled', error);
+                                fallbackDownload();
+                            });
+                        } else {
+                            fallbackDownload();
+                        }
+                    } else {
+                        fallbackDownload();
+                    }
+                }, 'image/png');
                 
             }).catch(err => {
                 console.error("Save error:", err);
@@ -969,6 +1008,20 @@
     const shareInput = document.getElementById('share-link');
     let qrInstance = null;
 
+    function showPreviewModal(imgData) {
+        document.getElementById('modal-title').innerText = "Save Your Bouquet";
+        document.getElementById('modal-desc').innerText = "Ready to be saved.";
+        
+        qrContainerWrapper.style.display = 'none';
+        linkDiv.style.display = 'none';
+        
+        const previewContainer = document.getElementById('preview-container');
+        if(previewContainer) previewContainer.style.display = 'block';
+        
+        document.getElementById('preview-image').src = imgData;
+        modal.classList.add('active');
+    }
+
     function showShareModal() {
         if(bouquetData.length === 0) {
             alert("Please add some flowers first!");
@@ -979,6 +1032,8 @@
         document.getElementById('modal-desc').innerText = "Copy the link below to share your creation.";
         
         qrContainerWrapper.style.display = 'none';
+        const previewContainer = document.getElementById('preview-container');
+        if(previewContainer) previewContainer.style.display = 'none';
         linkDiv.style.display = 'block';
         shareInput.value = url;
         
@@ -1009,6 +1064,8 @@
         document.getElementById('modal-desc').innerText = "Scan this code to instantly open the bouquet.";
         
         linkDiv.style.display = 'none';
+        const previewContainer = document.getElementById('preview-container');
+        if(previewContainer) previewContainer.style.display = 'none';
         qrContainerWrapper.style.display = 'flex'; // Use the flex wrapper to center
         qrDiv.innerHTML = ""; 
         
